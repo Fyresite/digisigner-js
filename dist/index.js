@@ -55,12 +55,13 @@ var Digisigner = function () {
     value: function sendSignatureRequest(document_id, signers) {
       var _this2 = this;
 
-      var title = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      var existing_fields = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+      var title = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
       return new Promise(function (resolve, reject) {
         var method = 'POST';
         var headers = new Headers();
-        var body = JSON.stringify({
+        var body = {
           embedded: true,
           send_emails: false,
           documents: [{
@@ -68,7 +69,11 @@ var Digisigner = function () {
             title: title,
             signers: signers
           }]
-        });
+        };
+
+        if (existing_fields.length > 0) {
+          body.existing_fields = existing_fields;
+        }
 
         headers.append('Authorization', 'Basic ' + _base2.default.encode('' + _this2.API_KEY));
         headers.append('Content-Type', 'application/json');
@@ -76,7 +81,7 @@ var Digisigner = function () {
         fetch('https://api.digisigner.com/v1/signature_requests', {
           method: method,
           headers: headers,
-          body: body
+          body: JSON.stringify(body)
         }).then(function (res) {
           return res.json();
         }).then(function (json) {

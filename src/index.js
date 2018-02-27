@@ -33,11 +33,11 @@ class Digisigner {
     });
   }
 
-  sendSignatureRequest(document_id, signers, title = '') {
+  sendSignatureRequest(document_id, signers, existing_fields = [], title = '') {
     return new Promise((resolve, reject) => {
       let method = 'POST';
       let headers = new Headers();
-      let body = JSON.stringify({
+      let body = {
         embedded: true,
         send_emails: false,
         documents: [
@@ -47,7 +47,11 @@ class Digisigner {
             signers
           }
         ]
-      });
+      };
+
+      if (existing_fields.length > 0) {
+        body.existing_fields = existing_fields;
+      }
   
       headers.append('Authorization', `Basic ${base64.encode(`${this.API_KEY}`)}`);
       headers.append('Content-Type', 'application/json');
@@ -55,7 +59,7 @@ class Digisigner {
       fetch('https://api.digisigner.com/v1/signature_requests', {
         method,
         headers,
-        body
+        body: JSON.stringify(body)
       })
       .then(res => {
         return res.json();
