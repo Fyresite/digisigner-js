@@ -33,7 +33,7 @@ class Digisigner {
     });
   }
 
-  sendSignatureRequest(document_id, signers, existing_fields = [], title = '') {
+  sendSignatureRequest(document_id, signers, title = '') {
     return new Promise((resolve, reject) => {
       let method = 'POST';
       let headers = new Headers();
@@ -48,10 +48,6 @@ class Digisigner {
           }
         ]
       };
-
-      if (existing_fields.length > 0) {
-        body.existing_fields = existing_fields;
-      }
   
       headers.append('Authorization', `Basic ${base64.encode(`${this.API_KEY}`)}`);
       headers.append('Content-Type', 'application/json');
