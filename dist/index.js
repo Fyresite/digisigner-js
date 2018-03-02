@@ -51,9 +51,36 @@ var Digisigner = function () {
       });
     }
   }, {
+    key: 'getSignatureRequestStatus',
+    value: function getSignatureRequestStatus(signature_request_id) {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        var method = 'GET';
+        var headers = new Headers();
+
+        headers.append('Authorization', 'Basic ' + _base2.default.encode('' + _this2.API_KEY));
+        headers.append('Content-Type', 'application/json');
+
+        fetch('https://api.digisigner.com/v1/signature_requests/' + signature_request_id, {
+          method: method,
+          headers: headers
+        }).then(function (res) {
+          return res.json();
+        }).then(function (json) {
+          resolve({
+            success: true,
+            response: json
+          });
+        }).catch(function (err) {
+          reject(err);
+        });
+      });
+    }
+  }, {
     key: 'sendSignatureRequest',
     value: function sendSignatureRequest(document_id, signers) {
-      var _this2 = this;
+      var _this3 = this;
 
       var title = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
@@ -70,7 +97,7 @@ var Digisigner = function () {
           }]
         };
 
-        headers.append('Authorization', 'Basic ' + _base2.default.encode('' + _this2.API_KEY));
+        headers.append('Authorization', 'Basic ' + _base2.default.encode('' + _this3.API_KEY));
         headers.append('Content-Type', 'application/json');
 
         fetch('https://api.digisigner.com/v1/signature_requests', {

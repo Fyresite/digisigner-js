@@ -6,20 +6,20 @@ dotenv.config();
 
 describe('Digisigner class', () => {
 
-  it('is an instance of Digisigner class', () => {
-    expect(new Digisigner(process.env.DIGISIGNER_API_KEY)).toBeInstanceOf(Digisigner);
-  });
+  // it('is an instance of Digisigner class', () => {
+  //   expect(new Digisigner(process.env.DIGISIGNER_API_KEY)).toBeInstanceOf(Digisigner);
+  // });
 
-  it ('gets the fields from the document', () => {
-    expect.assertions(1);
+  // it ('gets the fields from the document', () => {
+  //   expect.assertions(1);
 
-    let digisigner = new Digisigner(process.env.DIGISIGNER_API_KEY);
+  //   let digisigner = new Digisigner(process.env.DIGISIGNER_API_KEY);
 
-    return digisigner.getFields(process.env.DIGISIGNER_DOCUMENT_ID)
-      .then(res => {
-        expect(res).toHaveProperty('success', true);
-      });
-  });
+  //   return digisigner.getFields(process.env.DIGISIGNER_DOCUMENT_ID)
+  //     .then(res => {
+  //       expect(res).toHaveProperty('success', true);
+  //     });
+  // });
   
   it ('creates gets a signature request', () => {
     expect.assertions(1); // Necessary for Promises
@@ -93,7 +93,8 @@ describe('Digisigner class', () => {
 
     return digisigner.sendSignatureRequest(process.env.DIGISIGNER_DOCUMENT_ID, signers)
       .then(res => {
-        console.log(res.response.documents[0].signers[0]);
+        console.log(res.response);
+        // console.log(res.response.documents[0].signers[0]);
         expect(res).toHaveProperty('success', true);
       });
   });
