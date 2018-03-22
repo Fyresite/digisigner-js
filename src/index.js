@@ -6,6 +6,33 @@ class Digisigner {
     this.API_KEY = API_KEY;
   }
 
+  downloadDocument(document_id) {
+    return new Promise((resolve, reject) => {
+      let method = 'GET';
+      let headers = new Headers();
+  
+      headers.append('Authorization', `Basic ${base64.encode(`${this.API_KEY}`)}`);
+      headers.append('Content-Type', 'application/json');
+
+      fetch(`https://api.digisigner.com/v1/documents/${document_id}`, {
+        method,
+        headers
+      })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        resolve({
+          success: true,
+          response: json
+        })
+      })
+      .catch(err => {
+        reject(err);
+      });
+    });
+  }
+
   getFields(document_id) {
     return new Promise((resolve, reject) => {
       let method = 'GET';
