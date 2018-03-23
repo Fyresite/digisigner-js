@@ -6,20 +6,16 @@ dotenv.config();
 
 describe('Digisigner class', () => {
 
-  // it('is an instance of Digisigner class', () => {
-  //   expect(new Digisigner(process.env.DIGISIGNER_API_KEY)).toBeInstanceOf(Digisigner);
-  // });
+  it('is gets a document', () => {
+    let digisigner = new Digisigner(process.env.DIGISIGNER_API_KEY);
 
-  // it ('gets the fields from the document', () => {
-  //   expect.assertions(1);
+    return digisigner.downloadDocument(process.env.DIGISIGNER_DOCUMENT_ID)
+      .then(res => {
+        console.log(res);
 
-  //   let digisigner = new Digisigner(process.env.DIGISIGNER_API_KEY);
-
-  //   return digisigner.getFields(process.env.DIGISIGNER_DOCUMENT_ID)
-  //     .then(res => {
-  //       expect(res).toHaveProperty('success', true);
-  //     });
-  // });
+        expect(res).toHaveProperty('success', true);
+      });
+  });
   
   it ('creates gets a signature request', () => {
     expect.assertions(1); // Necessary for Promises

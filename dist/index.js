@@ -12,6 +12,10 @@ var _base2 = _interopRequireDefault(_base);
 
 require('isomorphic-fetch');
 
+var _https = require('https');
+
+var _https2 = _interopRequireDefault(_https);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35,18 +39,24 @@ var Digisigner = function () {
         headers.append('Authorization', 'Basic ' + _base2.default.encode('' + _this.API_KEY));
         headers.append('Content-Type', 'application/json');
 
-        fetch('https://api.digisigner.com/v1/documents/' + document_id, {
-          method: method,
-          headers: headers
-        }).then(function (res) {
-          return res.json();
-        }).then(function (json) {
-          resolve({
-            success: true,
-            response: json
+        _https2.default.get('https://api.digisigner.com/v1/documents/' + document_id, function (res) {
+          var data = [];
+
+          res.on('data', function (chunk) {
+            data = Buffer.concat(data);
           });
-        }).catch(function (err) {
-          reject(err);
+
+          res.on('end', function () {
+            resolve({
+              success: true,
+              response: data
+            });
+          });
+
+          res.on('error', function (err) {
+            console.log(err);
+            reject(err);
+          });
         });
       });
     }

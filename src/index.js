@@ -1,5 +1,6 @@
 import base64 from 'base-64';
 import 'isomorphic-fetch';
+import https from 'https';
 
 class Digisigner {
   constructor(API_KEY) {
@@ -14,21 +15,24 @@ class Digisigner {
       headers.append('Authorization', `Basic ${base64.encode(`${this.API_KEY}`)}`);
       headers.append('Content-Type', 'application/json');
 
-      fetch(`https://api.digisigner.com/v1/documents/${document_id}`, {
-        method,
-        headers
-      })
-      .then(res => {
-        return res.json();
-      })
-      .then(json => {
-        resolve({
-          success: true,
-          response: json
+      https.get(`https://api.digisigner.com/v1/documents/${document_id}`, res => {
+        let data = [];
+
+        res.on('data', chunk => {
+          data = Buffer.concat(data);
+        });
+
+        res.on('end', () => {
+          resolve({
+            success: true,
+            response: data
+          });
         })
-      })
-      .catch(err => {
-        reject(err);
+
+        res.on('error', err => {
+          console.log(err);
+          reject(err);
+        })
       });
     });
   }
