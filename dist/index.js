@@ -43,10 +43,11 @@ var Digisigner = function () {
           var data = [];
 
           res.on('data', function (chunk) {
-            data = Buffer.concat(data);
+            data.push(chunk);
           });
 
           res.on('end', function () {
+            data = Buffer.concat(data);
             resolve({
               success: true,
               response: data

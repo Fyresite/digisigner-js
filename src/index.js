@@ -19,10 +19,11 @@ class Digisigner {
         let data = [];
 
         res.on('data', chunk => {
-          data = Buffer.concat(data);
+          data.push(chunk);
         });
-
+          
         res.on('end', () => {
+          data = Buffer.concat(data);
           resolve({
             success: true,
             response: data
