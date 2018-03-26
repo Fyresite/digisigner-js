@@ -11,8 +11,6 @@ describe('Digisigner class', () => {
 
     return digisigner.downloadDocument(process.env.DIGISIGNER_DOCUMENT_ID)
       .then(res => {
-        console.log(res);
-
         expect(res).toHaveProperty('success', true);
       });
   });
@@ -89,7 +87,6 @@ describe('Digisigner class', () => {
 
     return digisigner.sendSignatureRequest(process.env.DIGISIGNER_DOCUMENT_ID, signers)
       .then(res => {
-        console.log(res.response);
         // console.log(res.response.documents[0].signers[0]);
         expect(res).toHaveProperty('success', true);
       });

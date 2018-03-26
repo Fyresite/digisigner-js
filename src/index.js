@@ -9,32 +9,40 @@ class Digisigner {
 
   downloadDocument(document_id) {
     return new Promise((resolve, reject) => {
-      let method = 'GET';
-      let headers = new Headers();
-  
-      headers.append('Authorization', `Basic ${base64.encode(`${this.API_KEY}`)}`);
-      headers.append('Content-Type', 'application/json');
 
-      https.get(`https://api.digisigner.com/v1/documents/${document_id}`, res => {
-        let data = [];
-
-        res.on('data', chunk => {
-          data.push(chunk);
+      var options = {
+        "method": "GET",
+        "hostname": "api.digisigner.com",
+        "port": null,
+        "path": "/v1/documents/1e95777f-c5fa-4714-8d2c-7f6034b2ce85",
+        "headers": {
+          "content-length": "0",
+          "authorization": `Basic ${base64.encode(`${this.API_KEY}:`)}`
+        }
+      };
+      
+      var req = https.request(options, function (res) {
+        var chunks = [];
+      
+        res.on("data", function (chunk) {
+          chunks.push(chunk);
         });
-          
-        res.on('end', () => {
-          data = Buffer.concat(data);
+      
+        res.on("end", function () {
+          var body = Buffer.concat(chunks);
           resolve({
             success: true,
-            response: data
+            response: body
           });
-        })
+        });
 
         res.on('error', err => {
           console.log(err);
           reject(err);
-        })
+        });
       });
+
+      req.end();
     });
   }
 

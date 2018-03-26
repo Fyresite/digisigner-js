@@ -33,24 +33,30 @@ var Digisigner = function () {
       var _this = this;
 
       return new Promise(function (resolve, reject) {
-        var method = 'GET';
-        var headers = new Headers();
 
-        headers.append('Authorization', 'Basic ' + _base2.default.encode('' + _this.API_KEY));
-        headers.append('Content-Type', 'application/json');
+        var options = {
+          "method": "GET",
+          "hostname": "api.digisigner.com",
+          "port": null,
+          "path": "/v1/documents/1e95777f-c5fa-4714-8d2c-7f6034b2ce85",
+          "headers": {
+            "content-length": "0",
+            "authorization": 'Basic ' + _base2.default.encode(_this.API_KEY + ':')
+          }
+        };
 
-        _https2.default.get('https://api.digisigner.com/v1/documents/' + document_id, function (res) {
-          var data = [];
+        var req = _https2.default.request(options, function (res) {
+          var chunks = [];
 
-          res.on('data', function (chunk) {
-            data.push(chunk);
+          res.on("data", function (chunk) {
+            chunks.push(chunk);
           });
 
-          res.on('end', function () {
-            data = Buffer.concat(data);
+          res.on("end", function () {
+            var body = Buffer.concat(chunks);
             resolve({
               success: true,
-              response: data
+              response: body
             });
           });
 
@@ -59,6 +65,8 @@ var Digisigner = function () {
             reject(err);
           });
         });
+
+        req.end();
       });
     }
   }, {
