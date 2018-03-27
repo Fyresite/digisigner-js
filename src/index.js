@@ -14,7 +14,7 @@ class Digisigner {
         "method": "GET",
         "hostname": "api.digisigner.com",
         "port": null,
-        "path": "/v1/documents/1e95777f-c5fa-4714-8d2c-7f6034b2ce85",
+        "path": `/v1/documents/${document_id}`,
         "headers": {
           "content-length": "0",
           "authorization": `Basic ${base64.encode(`${this.API_KEY}:`)}`
