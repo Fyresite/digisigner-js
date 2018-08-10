@@ -100,12 +100,13 @@ class Digisigner {
     });
   }
 
-  sendSignatureRequest(document_id, signers, title = '') {
+  sendSignatureRequest(document_id, signers, title = '', redirect_after_signing_to_url) {
     return new Promise((resolve, reject) => {
       let method = 'POST';
       let headers = new Headers();
       let body = {
-        embedded: true,
+        embedded: false,
+        redirect_after_signing_to_url,
         send_emails: false,
         documents: [
           {

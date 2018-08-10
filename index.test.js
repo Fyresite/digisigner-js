@@ -85,9 +85,10 @@ describe('Digisigner class', () => {
       }
     ];
 
-    return digisigner.sendSignatureRequest(process.env.DIGISIGNER_DOCUMENT_ID, signers)
+    return digisigner.sendSignatureRequest(process.env.DIGISIGNER_DOCUMENT_ID, signers, 'https://google.com')
       .then(res => {
-        // console.log(res.response.documents[0].signers[0]);
+        // console.log(res.response.documents);
+        console.log(res.response.documents[0].signers[0]);
         expect(res).toHaveProperty('success', true);
       });
   });

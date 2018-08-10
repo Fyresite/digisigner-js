@@ -129,12 +129,14 @@ var Digisigner = function () {
       var _this4 = this;
 
       var title = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      var redirect_after_signing_to_url = arguments[3];
 
       return new Promise(function (resolve, reject) {
         var method = 'POST';
         var headers = new Headers();
         var body = {
-          embedded: true,
+          embedded: false,
+          redirect_after_signing_to_url: redirect_after_signing_to_url,
           send_emails: false,
           documents: [{
             document_id: document_id,
