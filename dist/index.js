@@ -125,25 +125,13 @@ var Digisigner = function () {
     }
   }, {
     key: 'sendSignatureRequest',
-    value: function sendSignatureRequest(document_id, signers) {
+    value: function sendSignatureRequest(signature_request) {
       var _this4 = this;
-
-      var title = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-      var redirect_after_signing_to_url = arguments[3];
 
       return new Promise(function (resolve, reject) {
         var method = 'POST';
         var headers = new Headers();
-        var body = {
-          embedded: false,
-          redirect_after_signing_to_url: redirect_after_signing_to_url,
-          send_emails: false,
-          documents: [{
-            document_id: document_id,
-            title: title,
-            signers: signers
-          }]
-        };
+        var body = signature_request.toJSON();
 
         headers.append('Authorization', 'Basic ' + _base2.default.encode('' + _this4.API_KEY));
         headers.append('Content-Type', 'application/json');

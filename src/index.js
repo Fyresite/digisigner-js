@@ -100,22 +100,11 @@ class Digisigner {
     });
   }
 
-  sendSignatureRequest(document_id, signers, title = '', redirect_after_signing_to_url) {
+  sendSignatureRequest(signature_request) {
     return new Promise((resolve, reject) => {
       let method = 'POST';
       let headers = new Headers();
-      let body = {
-        embedded: false,
-        redirect_after_signing_to_url,
-        send_emails: false,
-        documents: [
-          {
-            document_id,
-            title,
-            signers
-          }
-        ]
-      };
+      let body = signature_request.toJSON();
   
       headers.append('Authorization', `Basic ${base64.encode(`${this.API_KEY}`)}`);
       headers.append('Content-Type', 'application/json');
