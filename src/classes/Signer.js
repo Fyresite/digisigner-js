@@ -20,10 +20,19 @@ class Signer {
     }
 
     toJSON() {
+        let { email, order, role } = this;
         let fields = this.fields.map(field => field.toJSON());
         let existing_fields = this.existing_fields.map(existing_field => existing_field.toJSON());
 
-        return Object.assign({}, this, { fields, existing_fields });
+        let signer = {
+            email,
+            order,
+            role,
+            fields,
+            existing_fields
+        };
+
+        return signer;
     }
 }
 

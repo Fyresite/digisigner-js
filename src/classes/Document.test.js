@@ -21,6 +21,7 @@ describe('Document class', () => {
             document_id: '12345',
             title: 'This is the title',
             message: 'This is the message',
+            subject: 'This is the subject',
             signers: [ signer ]
         });
     
@@ -35,34 +36,14 @@ describe('Document class', () => {
             document_id: '12345',
             title: 'This is the title',
             message: 'This is the message',
+            subject: 'This is the subject',
             signers: [
                 {
-                    email: 'tester@email.com',
+                    email: 'person@test.com',
                     order: null,
                     role: null,
-                    fields: [
-                        {
-                            type: null,
-                            page: null,
-                            rectangle: [],
-                            api_id: null,
-                            label: null,
-                            content: null,
-                            group_id: null,
-                            required: true,
-                            read_only: false
-                        }
-                    ],
-                    existing_fields: [
-                        {
-                            api_id: null,
-                            label: null,
-                            content: null,
-                            group_id: null,
-                            required: true,
-                            read_only: false
-                        }
-                    ]
+                    fields: [],
+                    existing_fields: []
                 }
             ]
         };

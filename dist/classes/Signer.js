@@ -40,6 +40,10 @@ var Signer = function () {
     }, {
         key: "toJSON",
         value: function toJSON() {
+            var email = this.email,
+                order = this.order,
+                role = this.role;
+
             var fields = this.fields.map(function (field) {
                 return field.toJSON();
             });
@@ -47,7 +51,15 @@ var Signer = function () {
                 return existing_field.toJSON();
             });
 
-            return Object.assign({}, this, { fields: fields, existing_fields: existing_fields });
+            var signer = {
+                email: email,
+                order: order,
+                role: role,
+                fields: fields,
+                existing_fields: existing_fields
+            };
+
+            return signer;
         }
     }]);
 

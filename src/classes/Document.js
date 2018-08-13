@@ -20,9 +20,25 @@ class Document {
     }
 
     toJSON() {
+        let { document_id, title, subject, message } = this;
+
+        // console.log(this.signers);
+
         let signers = this.signers.map(signer => signer.toJSON());
 
-        return Object.assign({}, this, { signers });
+        // console.log(signers);
+
+        let document = {
+            document_id,
+            title,
+            subject,
+            message,
+            signers
+        };
+
+        // console.log(document);
+
+        return document;
     }
 }
 

@@ -66,9 +66,7 @@ var Signature_Request = function () {
     }, {
         key: 'removeDocument',
         value: function removeDocument(document_id) {
-            console.log(this.documents);
             this.documents = this.documents.filter(function (document) {
-                console.log(document.document_id + ' !== ' + document_id);
                 return document.document_id !== document_id;
             });
         }

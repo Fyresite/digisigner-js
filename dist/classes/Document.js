@@ -40,11 +40,30 @@ var Document = function () {
     }, {
         key: "toJSON",
         value: function toJSON() {
+            var document_id = this.document_id,
+                title = this.title,
+                subject = this.subject,
+                message = this.message;
+
+            // console.log(this.signers);
+
             var signers = this.signers.map(function (signer) {
                 return signer.toJSON();
             });
 
-            return Object.assign({}, this, { signers: signers });
+            // console.log(signers);
+
+            var document = {
+                document_id: document_id,
+                title: title,
+                subject: subject,
+                message: message,
+                signers: signers
+            };
+
+            // console.log(document);
+
+            return document;
         }
     }]);
 

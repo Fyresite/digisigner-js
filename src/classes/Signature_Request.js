@@ -45,9 +45,7 @@ class Signature_Request {
     }
 
     removeDocument(document_id) {
-        console.log(this.documents);
         this.documents = this.documents.filter(document => {
-            console.log(`${document.document_id} !== ${document_id}`);
             return document.document_id !== document_id;
         });
     }
