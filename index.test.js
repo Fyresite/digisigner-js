@@ -1,6 +1,9 @@
-import Digisigner from './dist/index';
-import dotenv     from 'dotenv';
-import 'isomorphic-fetch';
+const Digisigner = require('./dist/index');
+const dotenv = require('dotenv');
+require('isomorphic-fetch');
+// import Digisigner from './dist/index';
+// import dotenv     from 'dotenv';
+// import 'isomorphic-fetch';
 
 dotenv.config();
 
@@ -85,10 +88,10 @@ describe('Digisigner class', () => {
       }
     ];
 
-    return digisigner.sendSignatureRequest(process.env.DIGISIGNER_DOCUMENT_ID, signers, 'https://google.com')
+    return digisigner.sendSignatureRequest(process.env.DIGISIGNER_DOCUMENT_ID, signers, '', 'https://google.com')
       .then(res => {
-        // console.log(res.response.documents);
-        console.log(res.response.documents[0].signers[0]);
+        // console.log(res.response);
+        // console.log(res.response.documents[0].signers[0]);
         expect(res).toHaveProperty('success', true);
       });
   });
