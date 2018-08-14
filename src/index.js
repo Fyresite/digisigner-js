@@ -2,6 +2,13 @@ import base64 from 'base-64';
 import 'isomorphic-fetch';
 import https from 'https';
 
+// Include all the classes
+import Document from './classes/Document';
+import Existing_Field from './classes/Existing_Field';
+import Field from './classes/Field';
+import Signature_Request from './classes/Signature_Request';
+import Signer from './classes/Signer';
+
 class Digisigner {
   constructor(API_KEY) {
     this.API_KEY = API_KEY;
@@ -129,5 +136,13 @@ class Digisigner {
     });
   }
 }
+
+export {
+  Document,
+  Existing_Field,
+  Field,
+  Signature_Request,
+  Signer
+};
 
 export default Digisigner;

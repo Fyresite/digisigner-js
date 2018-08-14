@@ -3,8 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Signer = exports.Signature_Request = exports.Field = exports.Existing_Field = exports.Document = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+// Include all the classes
+
 
 var _base = require('base-64');
 
@@ -15,6 +19,26 @@ require('isomorphic-fetch');
 var _https = require('https');
 
 var _https2 = _interopRequireDefault(_https);
+
+var _Document = require('./classes/Document');
+
+var _Document2 = _interopRequireDefault(_Document);
+
+var _Existing_Field = require('./classes/Existing_Field');
+
+var _Existing_Field2 = _interopRequireDefault(_Existing_Field);
+
+var _Field = require('./classes/Field');
+
+var _Field2 = _interopRequireDefault(_Field);
+
+var _Signature_Request = require('./classes/Signature_Request');
+
+var _Signature_Request2 = _interopRequireDefault(_Signature_Request);
+
+var _Signer = require('./classes/Signer');
+
+var _Signer2 = _interopRequireDefault(_Signer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -157,5 +181,9 @@ var Digisigner = function () {
   return Digisigner;
 }();
 
+exports.Document = _Document2.default;
+exports.Existing_Field = _Existing_Field2.default;
+exports.Field = _Field2.default;
+exports.Signature_Request = _Signature_Request2.default;
+exports.Signer = _Signer2.default;
 exports.default = Digisigner;
-module.exports = exports['default'];

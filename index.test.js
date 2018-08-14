@@ -1,16 +1,22 @@
-const Digisigner = require('./dist/index');
+const Digisigner = require('./dist/index').default;
+const Document = require('./dist/index').Document;
+const Existing_Field = require('./dist/index').Existing_Field;
+const Signature_Request = require('./dist/index').Signature_Request;
+const Signer = require('./dist/index').Signer;
 const dotenv = require('dotenv');
 require('isomorphic-fetch');
 
-const Document = require('./dist/Document');
-const Existing_Field = require('./dist/Existing_Field');
-const Signature_Request = require('./dist/Signature_Request');
+// const Document = require('./dist/Document');
+// const Existing_Field = require('./dist/Existing_Field');
+// const Signature_Request = require('./dist/Signature_Request');
 
 dotenv.config();
 
 describe('Digisigner class', () => {
 
   it('is gets a document', () => {
+    console.log(Digisigner);
+
     let digisigner = new Digisigner(process.env.DIGISIGNER_API_KEY);
 
     return digisigner.downloadDocument(process.env.DIGISIGNER_DOCUMENT_ID)
