@@ -1,14 +1,7 @@
 {
-  "presets": [
-    "env",
-    "stage-0"
-  ],
+  "presets": ["env"],
   "plugins": [
     "transform-export-default",
-    "add-module-exports",
-    "transform-es2015-modules-commonjs"
-  ],
-  "ignore": [
-    "**/*.test.js"
+    "add-module-exports"
   ]
 }
