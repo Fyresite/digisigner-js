@@ -5,16 +5,17 @@
   "main": "dist/index.js",
   "dependencies": {
     "base-64": "^0.1.0",
-    "file-type": "^7.6.0",
-    "isomorphic-fetch": "^2.2.1"
+    "file-type": "^7.7.1",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "4.17.11"
   },
+  "babel-cli": "^6.26.0",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-export-default": "^7.0.0-alpha.20",
-    "babel-preset-env": "^1.6.1",
-    "jest": "^22.4.0",
-    "dotenv": "^5.0.0"
+    "babel-preset-env": "^1.7.0",
+    "dotenv": "^5.0.1",
+    "jest": "^22.4.4"
   },
   "scripts": {
     "build": "babel src -d dist",
